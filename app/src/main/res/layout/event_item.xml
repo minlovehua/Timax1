@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.example.clock.LeftSlideView xmlns:android="http://schemas.android.com/apk/res/android"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="100dp"
+                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                 android:layout_marginBottom="1dp"
+                                 android:background="@android:color/white">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/tv_set"
+                android:layout_height="106dp"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/layout_content"
+                android:text="设置"
+                android:textSize="25dp"
+                android:background="@drawable/btn_click_orange_havebackground"
+                android:textColor="#DDFFFFFF"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_height="match_parent"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/tv_set"
+                android:text="删 除"
+                android:textSize="25dp"
+                android:background="@drawable/btn_click_red_havebackground"
+                android:textColor="#DDFFFFFF"
+                />
+
+
+            <RelativeLayout
+                android:id="@+id/layout_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/event_name"
+                    android:layout_width="371dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_click_black_havebackground"
+                    android:lines="2"
+                    android:text="事件"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="20sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <TextView
+                    android:id="@+id/event_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/event_name"
+                    android:background="@drawable/btn_click_black_havebackground"
+                    android:gravity="left"
+                    android:text="2017.8.5  " />
+
+                <TextView
+                    android:id="@+id/event_time"
+                    android:layout_width="61dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/event_name"
+                    android:layout_toRightOf="@+id/event_date"
+                    android:background="@drawable/btn_click_black_havebackground"
+                    android:gravity="right"
+                    android:text="09:30" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</com.example.clock.LeftSlideView>

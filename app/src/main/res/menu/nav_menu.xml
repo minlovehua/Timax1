@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/remind"
+        android:icon="@mipmap/ic_action_volume"
+        android:title="提醒"/>
+    <item
+        android:id="@+id/memorandum"
+        android:icon="@mipmap/ic_action_document"
+        android:title="备忘录"/>
+    <item
+        android:id="@+id/monitor"
+        android:icon="@mipmap/ic_action_eye_open"
+        android:title="监控"/>
+
+    <item
+        android:id="@+id/add"
+        android:icon="@mipmap/ic_action_sun"
+        android:title="天气"/>
+
+
+    <item
+        android:id="@+id/setting"
+        android:icon="@mipmap/ic_action_settings"
+        android:title="配置挂钟"/>
+    <item
+        android:id="@+id/account"
+        android:icon="@mipmap/ic_action_users"
+        android:title="账户详情"/>
+
+</group>
+</menu>

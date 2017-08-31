@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!--当多点触控时会产生一些问题，所以在style中直接屏蔽多点触控-->
+        <item name="android:windowEnableSplitTouch" >false </item>
+        <item name="android:splitMotionEvents" >false </item>
+
+        <!--toolbar颜色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!---->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--窗口的背景颜色-->
+        <item name="android:windowBackground">@android:color/white</item>
+
+    </style>
+
+
+    <!--toolbar弹出菜单风格-->
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
+
+        <!--是否覆盖锚点，默认为true,即覆盖Toolbar-->
+        <item name="overlapAnchor">false</item>
+
+        <!--弹出层背景颜色-->
+        <item name="android:popupBackground">@android:color/white</item>
+
+        <!--弹出层垂直方向上的偏移，即竖直方向上距离Toolbar的距离，值为负则会覆盖Toolbar-->
+        <item name="android:dropDownVerticalOffset">4dp</item>
+
+        <!--弹出层水平方向上的偏移，即距离屏幕右边的距离，值为负，则会导致右边出现间隙-->
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+
+
+
+        <!--颜色渐变半径-->
+        <item name="android:gradientRadius">15dp</item>
+        <item name="android:radius">50dp</item>
+    </style>
+
+</resources>
