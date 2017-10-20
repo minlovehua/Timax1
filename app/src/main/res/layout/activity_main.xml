@@ -8,6 +8,7 @@
     <!--这里用Fragement第一个卡式图片会被Toolbar遮挡，所以改用CoordinatorLayout-->
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/coordinate"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -3,8 +3,10 @@ package com.example.clock;
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -15,10 +17,15 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +37,7 @@ import static android.widget.Toast.makeText;
 public class ListActivity extends AppCompatActivity {
 
 
+
     private List<Event> eventList = new ArrayList<>();
 
     private static final String TAG = "ListActivity";
@@ -37,7 +45,8 @@ public class ListActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     EventAdapter mAdapter;
     private DrawerLayout mDrawerLayout;
-    private Event[] events = {new Event("唱K", "2019.7.25", "17:30"), new Event("逛街", "2018.6.21", "14:30")};
+    private CoordinatorLayout coordinatorLayout;
+    private Event[] events = {new Event("唱K", "2019.7.25  17:30"), new Event("逛街", "2018.6.21  14:30")};
     private int count;//记录eventList.size-1
     private int tiaoshu = 0;//测试：添加数据的条数
 
@@ -66,9 +75,10 @@ public class ListActivity extends AppCompatActivity {
 
                 count++;//记录添加的为位置
                 tiaoshu++;//记录添加的是第几条数据
-                eventList.add(1, new Event("第" + tiaoshu + "条添加", "2019.5.25", "17:30"));//参数1：新添加数据的位置
+                eventList.add(1, new Event("第" + tiaoshu + "条添加", "2019.2.19  17:30"));//参数1：新添加数据的位置
                 mAdapter.notifyItemInserted(1);//参数1：新添加数据的位置
                 mAdapter.notifyItemRangeChanged(1, eventList.size() - 2);//参数1：新添加数据的位置
+
 
             }
         });
@@ -155,41 +165,50 @@ public class ListActivity extends AppCompatActivity {
             public void onMoved(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int
                     fromPos, RecyclerView.ViewHolder target, int toPos, int x, int y) {
                 super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y);
+
+
                 // 移动完成后刷新列表
                 mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target
                         .getAdapterPosition());
+
             }
 
+            //
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
 
+                //借鉴,先用一个变量把要删除的数据存起来
+                final Event event = eventList.get(viewHolder.getAdapterPosition());
 
-                AlertDialog show = new AlertDialog.Builder(ListActivity.this)
-                        .setTitle(" ")                                                   //设置对话框标题
-                        .setMessage("确定删除此数据？")                                    //设置显示的内容
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() { //添加确定按钮
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(ListActivity.this,"当前的position是："+viewHolder.getAdapterPosition(),Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "删除的position是"+viewHolder.getAdapterPosition());
+                final int currentPosition = viewHolder.getAdapterPosition();
+                eventList.remove(viewHolder.getAdapterPosition());
+                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+
+                coordinatorLayout=(CoordinatorLayout) findViewById(R.id.coordinate);
+                Snackbar.make(coordinatorLayout,"刪除", Snackbar.LENGTH_SHORT).setAction("Undo",new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+
+                        //set回去。
+                        //Toast.makeText(ListActivity.this,"取消刪除",Toast.LENGTH_LONG).show();
+
+                        //????????????(怎么撤销删除？)？？？？？？？？？？？？
+                        Toast.makeText(ListActivity.this,"删除完后position是："+viewHolder.getAdapterPosition(),Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "删除完后position是"+viewHolder.getAdapterPosition());
+                        eventList.add(currentPosition,event);
+                        mAdapter.notifyItemInserted(currentPosition);
 
 
 
-                                // 将数据集中的数据移除
-                                eventList.remove(viewHolder.getAdapterPosition());
-                                // 刷新列表
-                                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                    }
+                }).show();
 
-                                //mAdapter.removeData(position);
 
-                                //Toast.makeText(EventAdapter1.this,"删除成功！",Toast.LENGTH_LONG).show();
-                                //finish();//关闭应用
-                            }
-                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                //Toast.makeText(EventAdapter.this,"恢复，不删除！",Toast.LENGTH_LONG).show();
-                            }
-                        }).show();
+
+
 
             }
         }).attachToRecyclerView(mRecyclerView);
@@ -210,7 +229,8 @@ public class ListActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new EventAdapter(eventList);
+
+        mAdapter = new EventAdapter(eventList,this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -300,4 +320,30 @@ public class ListActivity extends AppCompatActivity {
         animator.start();
     }
 
+
+
 }
+
+
+
+/*                AlertDialog show = new AlertDialog.Builder(ListActivity.this)
+                        .setTitle(" ")                                                   //设置对话框标题
+                        .setMessage("确定删除此数据？")                                    //设置显示的内容
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() { //添加确定按钮
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // 将数据集中的数据移除
+                                eventList.remove(viewHolder.getAdapterPosition());
+                                // 刷新列表
+                                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                //取消刪除
+
+                            }
+                        }).show();*/

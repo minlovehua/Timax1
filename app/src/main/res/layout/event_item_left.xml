@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="4dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+
+<LinearLayout android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:baselineAligned="false"
+              android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginRight="3dp"
+        android:gravity="center|right"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/left_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="2016-06-28 17:50" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <!-- 上下各画一根橙色的线条，线宽设置为2dp -->
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:background="#FB7F02"/>
+
+        <!-- 设置中间的节点大小为20x20 -->
+
+        <TextView
+            android:background="@mipmap/ic_launcher_round"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textColor="#0e0e0e"
+            android:gravity="center"
+            android:text="11.11" />
+
+
+<!--        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_launcher_round" />-->
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:background="#FB7F02" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="3dp"
+        android:background="@mipmap/e2"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+
+        <TextView
+            android:id="@+id/left_item_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="这里可以放自定义的布局或内容" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</android.support.v7.widget.CardView>

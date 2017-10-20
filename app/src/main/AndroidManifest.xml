@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListActivity"></activity>
+        <activity android:name="com.example.clock.SetRemindActivity"></activity>
     </application>
 
 </manifest>
